@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DripOrDry</title>
+  <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;700&display=swap&family=Unkempt:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DynaPuff', cursive; /* Use DynaPuff font */
+      background-color: #f3f4f6; /* Background color */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full height */
+      text-align: center; /* Center the text */
+      color: #333; /* Text color */
+      flex-direction: column; /* Stack items vertically */
+    }
+
+    /* General body styling */
+    body {
+            font-family: 'Comic Sans MS', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0;
+            min-height: 120vh;
+            background-color: #ADD8E6; /* Light blue background color */
+            background-image: url('logo2.jpg'); /* Background image path */
+            background-size: cover;      /* Makes image cover the entire page */
+            background-repeat: no-repeat; /* Prevents tiling of the image */
+            background-position: center; /* Centers the image */
+        }
+
+      /* Splash Screen Styling */
+      .splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #edf4f7; /* Match page background */
+            z-index: 9999;
+            animation: fadeOut 1s 3s forwards; /* Fades out after animation */
+        }
+
+    /* Logo Animation */
+      .splash img {
+          width: 300px;
+          height: auto;
+          animation: popUp 2s ease-in-out forwards;
+        }
+
+    /* Keyframes for pop-up animation */
+    @keyframes popUp {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Keyframes for fading out the splash */
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+    /* Header styling */
+    .header {
+      font-size: 36px;
+      color: rgb(0, 8, 8);
+      background-color: #399da8;
+      text-align: center;
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    /* Home icon styling */
+    .home-icon {
+      position: fixed;
+      bottom: 20px; /* 20px from the bottom */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Adjust to truly center */
+      font-size: 24px;
+      color: #fff;
+      cursor: pointer;
+      background-color: #399da8;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+      transition: background-color 0.3s; /* Transition effect for hover */
+    }
+
+    /* Home icon hover effect */
+    .home-icon:hover {
+      background-color: #317b8e;
+    }
+
+    /* Instruction text styling */
+    .instruction {
+      font-family: 'Unkempt', cursive;
+      font-size: 30px; /* Increased size */
+      color: #555;
+      margin-bottom: 15px;
+      text-align: center;
+      margin-top: 100px; /* Space for fixed header */
+    }
+
+    /* Camera icon styling */
+    .camera-icon {
+      font-size: 48px;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+      margin-bottom: 15px; /* Space between icon and bubble */
+    }
+
+    .camera-icon:hover {
+      background-color: #ccc;
+    }
+
+    /* Hide the actual file input */
+    #cameraInput {
+      display: none;
+    }
+
+    /* Bath buddy bubble styling */
+    .bath-buddy-bubble {
+      font-family: 'Unkempt', cursive; /* Use Unkempt font */
+      font-size: 30px; /* Increased size */
+      color: #fff; /* Text color */
+      background-color: #399da8; /* Bubble background color */
+      padding: 15px 25px; /* Space around the text */
+      border-radius: 25px; /* Makes the bubble shape */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+      cursor: pointer; /* Show pointer cursor */
+      text-decoration: none; /* Remove underline */
+      transition: background-color 0.3s; /* Transition for hover effect */
+    }
+
+    /* Bubble hover effect */
+    .bath-buddy-bubble:hover {
+      background-color: #317b8e; /* Darker shade on hover */
+    }
+
+    /* Main text bubble styling on Bath Decision page */
+    .decision-bubble {
+      display: inline-block;
+      background-color: rgba(57, 157, 168, 0.8); /* Bubble background color */
+      color: white; /* Text color */
+      padding: 20px 30px; /* Space around the text */
+      border-radius: 30px; /* Makes the bubble shape */
+      font-size: 48px; /* Font size */
+      cursor: pointer; /* Show pointer cursor on hover */
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+      transition: background-color 0.3s ease; /* Transition effect for hover */
+    }
+
+    /* Hover effect for decision bubble */
+    .decision-bubble:hover {
+      background-color: rgba(45, 134, 145, 1); /* Darker shade on hover */
+    }
+
+    /* Hidden question and options styling */
+    .question {
+      display: none; /* Hide question initially */
+      margin-top: 20px; /* Space above question */
+      font-size: 36px; /* Font size for question */
+      margin-bottom: 20px; /* Space below the question */
+    }
+
+    /* Option bubble styling */
+    .option {
+      display: inline-block; /* Display as inline block */
+      background-color: rgba(57, 157, 168, 0.8); /* Bubble background color */
+      color: white; /* Text color */
+      padding: 15px 30px; /* Space around the text */
+      border-radius: 25px; /* Makes the bubble shape */
+      font-size: 24px; /* Font size */
+      cursor: pointer; /* Show pointer cursor on hover */
+      margin: 10px; /* Space between options */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+      transition: background-color 0.3s; /* Transition for hover effect */
+    }
+
+    /* Hover effect for option bubbles */
+    .option:hover {
+      background-color: rgba(45, 134, 145, 1); /* Darker shade on hover */
+    }
+
+    /* Response message styling */
+    .response-message {
+      display: none; /* Hide by default */
+      margin-top: 20px;
+      font-size: 28px;
+      color: #399da8;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Splash Screen -->
+   <div class="splash">
+    <img src="pic.jpg" alt="Logo"> <!-- Replace 'pic.jpg' with the path to your logo file -->
+</div>
+
+
+  <!-- Header Title -->
+  <div class="page active">
+        DripOrDry?
+  </div>
+
+  <!-- Instruction Text -->
+  <div class="instruction">
+    Use me to sense a stinky
+  </div>
+
+  <!-- Camera Icon -->
+  <label class="camera-icon" id="openCamera">📷</label>
+  
+  <!-- Comment Display -->
+  <div class="comment" id="commentDisplay"></div>
+
+  <!-- Video Element for camera -->
+  <video id="video" autoplay playsinline></video>
+
+  <script>
+    const openCamera = document.getElementById('openCamera');
+    const commentDisplay = document.getElementById('commentDisplay');
+    const video = document.getElementById('video');
+
+    // Hair judgment comments
+    const hairComments = [
+      "Damn!!! This dude hasn't bathed for a year.",
+      "Eww!!! This guy didn't bath today.",
+      "Stingy!!! People like you spread smell.",
+      "Mhmm!!! You are fresh."
+    ];
+
+    // Function to start the camera
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+        video.style.display = 'block'; // Show video element
+        detectHair(); // Start hair detection
+      } catch (error) {
+        console.error('Error accessing the camera: ', error);
+        alert("Unable to access the camera. Please check your permissions.");
+      }
+    }
+
+    // Mock hair detection function
+    function detectHair() {
+      // Simulate hair detection logic
+      setTimeout(() => {
+        const comment = generateComment(); // Generate comment based on detected hair
+        displayComment(comment); // Display comment
+      }, 2000); // Simulate 2 seconds for detection
+    }
+
+    // Generate a random comment based on hair
+    function generateComment() {
+      const randomIndex = Math.floor(Math.random() * hairComments.length);
+      return hairComments[randomIndex]; // Return a random comment
+    }
+
+    // Display the comment
+    function displayComment(comment) {
+      // Fade out the current comment if it's visible
+      if (commentDisplay.style.opacity == 1) {
+        commentDisplay.style.opacity = 0; // Fade out
+        setTimeout(() => {
+          commentDisplay.textContent = comment; // Update the text after fade out
+          commentDisplay.style.opacity = 1; // Fade in
+        }, 500); // Wait for fade out to complete
+      } else {
+        commentDisplay.textContent = comment; // Directly set text if not visible
+        commentDisplay.style.opacity = 1; // Show comment
+      }
+
+      // Redirect to details after a delay
+      setTimeout(() => {
+        redirectToDetails(comment);
+      }, 3000); // Delay before redirecting
+    }
+
+    // Redirect to the details page
+    function redirectToDetails(comment) {
+      // Use localStorage to pass the comment to the next page
+      localStorage.setItem('scanComment', comment);
+      window.location.href = 'details.html'; // Change to the name of your details page
+    }
+
+    // Event listener for camera icon click
+    openCamera.addEventListener('click', function() {
+      startCamera(); // Start the camera
+    });
+  </script>
+  <!-- Bath Buddy Bubble -->
+  <div class="bath-buddy-bubble" onclick="showDecision()">
+    bath buddy?
+  </div>
+
+  <!-- Hidden Decision Content -->
+  <div class="content" style="display: none;" id="decisionContent">
+    <div class="decision-bubble" onclick="showQuestion()">
+      🚿 WHETHER SHOULD I BATH TODAY????? 🚿
+    </div>
+  </div>
+
+  <!-- Hidden Question and Options -->
+  <div class="question" id="bathQuestion">
+    hmmm...let me think🤔 did you bath yesterday?🧐
+  </div>
+  <div class="option" id="yesOption" style="display: none;" onclick="handleYes()">
+    Yes
+  </div>
+  <div class="option" id="noOption" style="display: none;" onclick="handleNo()">
+    No
+  </div>
+
+  <!-- Response Message Area -->
+  <div class="response-message" id="responseMessage"></div>
+
+  <!-- Home Icon -->
+  <a href="#" class="home-icon" onclick="goHome()">🏠 Home</a>
+
+  <script>
+    function showDecision() {
+      document.querySelector('.instruction').style.display = 'none'; // Hide instruction text
+      document.querySelector('.camera-icon').style.display = 'none'; // Hide camera icon
+      document.querySelector('.bath-buddy-bubble').style.display = 'none'; // Hide bath buddy bubble
+      document.getElementById('decisionContent').style.display = 'block'; // Show decision content
+    }
+
+    function showQuestion() {
+      document.getElementById('decisionContent').style.display = 'none'; // Hide decision content
+      document.getElementById('bathQuestion').style.display = 'block'; // Show question
+      document.getElementById('yesOption').style.display = 'inline-block'; // Show Yes option
+      document.getElementById('noOption').style.display = 'inline-block'; // Show No option
+    }
+
+    function handleNo() {
+      const responses = [
+        " You don't have to bath today !!🎉",
+        " Take a bath, you lazy lad!! 🙆‍♀",
+        " You could take a break from bath for 2 days !!😋",
+        " Maybe there is no need to bath for the rest of your life!!😉😉"
+      ];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)]; // Select a random response
+      document.getElementById('responseMessage').innerText = randomResponse; // Display the response
+      document.getElementById('responseMessage').style.display = 'block'; // Show response message
+    }
+
+    function handleYes() {
+      const noResponses = [
+        "Good choice! Sometimes skipping a bath is okay.Today is as skip day!! 🎉",
+        "No worries, enjoy your fresh feeling! 😊",
+        "You can always have a bath tomorrow! 😁",
+        "Sounds good! Let that fresh feeling last! 😉"
+      ];
+      const randomNoResponse = noResponses[Math.floor(Math.random() * noResponses.length)]; // Select a random response
+      document.getElementById('responseMessage').innerText = randomNoResponse; // Display the response
+      document.getElementById('responseMessage').style.display = 'block'; // Show response message
+    }
+
+    function goHome() {
+      // Logic to reset the page back to the home view
+      document.querySelector('.instruction').style.display = 'block'; // Show instruction text
+      document.querySelector('.camera-icon').style.display = 'flex'; // Show camera icon
+      document.querySelector('.bath-buddy-bubble').style.display = 'block'; // Show bath buddy bubble
+      document.getElementById('decisionContent').style.display = 'none'; // Hide decision content
+      document.getElementById('bathQuestion').style.display = 'none'; // Hide question
+      document.getElementById('yesOption').style.display = 'none'; // Hide Yes option
+      document.getElementById('noOption').style.display = 'none'; // Hide No option
+      document.getElementById('responseMessage').style.display = 'none'; // Hide response message
+    }
+  </script>
+</body>
+</html>
