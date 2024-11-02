@@ -16,7 +16,7 @@
   for software:
           Language used:html
           Libraries used:bootstrat
-#Screebshots
+#Screenshots
 ![DripOrDry and 24 more pages - Personal - Microsoft​ Edge 02-11-2024 22_23_24](https://github.com/user-attachments/assets/600224ae-ac4b-4f34-acb7-81bf21094bf7)
 Thins is the front page of the app from where we can access the camera to check whether someone bathed or not. The bathbuddy? option gives an option to bath today or not.
 ![DripOrDry and 24 more pages - Personal - Microsoft​ Edge 02-11-2024 22_23_55](https://github.com/user-attachments/assets/fad35539-86ec-492e-b58d-326664455b42)
